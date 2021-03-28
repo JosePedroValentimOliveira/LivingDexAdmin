@@ -14,7 +14,8 @@
     </button>
     <transition name="fade-down" mode="out-in">
       <div class="flex flex-col" v-if="opentab === 'pokedex'">
-        <router-link to="/" class="router-link">
+        
+        <router-link to="/pokedex-database" class="router-link">
         <div class="wrapper transform transition duration-150 flex flex-row items-center justify-start w-full">
         <div class="w-1/12 ml-4">
           <img   src="https://i.pinimg.com/originals/8a/bc/4d/8abc4d98d9df0d8a9caa486fe1aa0ac5.png"/>
@@ -26,7 +27,7 @@
         </router-link>
       
       
-        <router-link to="/" class="router-link">
+        <router-link to="/add-pokemon" class="router-link focus:outline-none">
         <div class="wrapper transform transition duration-150 flex flex-row items-center justify-start w-full">
         <div class="w-1/12 ml-4">
           <img   src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-add-icon.png"/>
@@ -53,7 +54,7 @@
     </button>
     <transition name="fade-down" mode="out-in">
       <div class="flex flex-col" v-if="opentab === 'vgc'">
-        <router-link to="/" class="router-link">
+        <router-link to="/vgc-database" class="router-link">
         <div class="wrapper transform transition duration-150 flex flex-row items-center justify-start w-full">
         <div class="w-1/12 ml-4">
           <img   src="https://i.pinimg.com/originals/8a/bc/4d/8abc4d98d9df0d8a9caa486fe1aa0ac5.png"/>
@@ -65,7 +66,7 @@
         </router-link>
       
       
-        <router-link to="/" class="router-link">
+        <router-link to="/add-pokemon-vgc" class="router-link">
         <div class="wrapper transform transition duration-150 flex flex-row items-center justify-start w-full">
         <div class="w-1/12 ml-4">
           <img   src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-add-icon.png"/>
