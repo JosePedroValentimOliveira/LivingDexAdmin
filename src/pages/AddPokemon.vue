@@ -2,6 +2,16 @@
     <div class="flex flex-col items-center ">
         <h1 class="text-3xl">Add Pokemon</h1>
 
+        <div class="w-full flex flex-row">
+            <div class="w-6/12 m-6 flex flex-col justify-start ">
+                        <p class="">Id: </p>
+                        <input class=" w-10/12 p-1 text-center border-gray-500 rounded border h-8" type="text" id="shinyF" name="shinyF" v-model="shinyF"><br>
+            </div>
+                    <div  v-if='this.shinyF' class="flex flex-col  w-1/12 h30 " style="height:75px;width:75px">
+                        <img  :src="this.shinyF"/>
+                    </div>
+        </div>
+
         <form class="bg-blue-300 w-full p-10 flex flex-col items-center justify-center gap-3" method="POST" action="http://localhost:3000/test">
             <button type="submit" class="border border-black absolute top-20 right-20 rounded p-2 bg-blue-300 text-black font-bold">Save Pokemon</button>
             <div class="flex flex-row items-center w-10/12">
@@ -64,17 +74,20 @@
                 
             </div>
 
-            <div class="w-11/12 flex flex-row items-center space-x-3">
+            <div class="w-full flex flex-row items-center border border-black ">
                 
 
-                <div class="w-4/12 text-center ">
-                    <h1>Typing:</h1>
-                    <div class="flex flex-row  items-center ">
-                        <div class="w-4/12 ">
-                            <label for="secondTypeCheck">Dual type: </label>
+                <div class="w-4/12 text-center justify-center border-l border-black">
+                    
+                    <div class="flex flex-row items-center justify-between">
+                        <h1 class=" font-bold">Typing: </h1>
+                        <div>
                             <input v-model="secondType" type="checkbox" name="secondTypeCheck" id="secondTypeCheck">
+                            Dual type
                         </div>
-                        <div class="w-8/12  flex flex-row gap-2">
+                    </div>
+                    <div class="flex flex-row  items-center justify-center">
+                        <div class="w-full  flex flex-row gap-2">
                             <select class="border border-gray-500 rounded h-8  bg-gray-100   w-5/12 " name="typing" >
                             <option class="text-center" v-for="type in types" :value="type" :key="type">{{type}}</option>
                         </select>
@@ -87,15 +100,15 @@
                     </div>
                 </div>
 
-                <div class="w-4/12 text-center ">
+                <div class="w-4/12 text-center border border-black">
                     <div class="flex flex-row items-center justify-between">
                         <h1 class=" font-bold">Gender ratio: </h1>
                         <div>
                             Genderless:
-                            <input type="checkbox">
+                            <input type="checkbox" v-model="genderless">
                         </div>
                     </div>
-                    <div class=" flex flex-row ">
+                    <div class=" flex flex-row " v-if="!genderless">
                         <p class="flex flex-row items-center gap-2 mr-2">Male<img class="h-4" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Male-s%C3%ADmbolo2.svg/199px-Male-s%C3%ADmbolo2.svg.png" alt="">: </p>
                         <div class="border border-gray-500 rounded h-8  bg-gray-100 flex flex-row items-center p-2 w-3/12 mr-6">
                             <input v-model="maleRatio"  @change="changeFemale(maleRatio)" type="number" max="100" min="0" step="0.1" name="maleRatio" id="maleRatio" class="overflow-hidden text-center border-0 outline-none bg-transparent w-full" >
@@ -114,17 +127,17 @@
                      <div class="flex flex-row items-center justify-between">
                         <h1 class=" font-bold">Egg group: </h1>
                         <div>
-                            Dual egg group:
                             <input v-model="secondEgg" type="checkbox" name="secondEgg" id="secondEgg">
+                            Dual egg group
                         </div>
                     </div>
                     <div class="flex flex-row  items-center justify-center ">
                        
                         <div class="w-8/12  flex flex-row gap-2">
-                            <select class="border border-gray-500 rounded h-8  bg-gray-100   w-6/12 " name="eggGroup" >
+                            <select class="border border-gray-500 rounded h-8  bg-gray-100   w-7/12 " name="eggGroup" >
                                 <option v-for="group in eggGroups" :value="group" :key="group">{{group}}</option>
                             </select>
-                            <select class="border border-gray-500 rounded h-8  bg-gray-100   w-6/12 " v-if="secondEgg" name="eggGroup" >
+                            <select class="border border-gray-500 rounded h-8  bg-gray-100   w-7/12 " v-if="secondEgg" name="eggGroup" >
                                 <option v-for="group in eggGroups" :value="group" :key="group">{{group}}</option>
                             </select>
                         </div>
@@ -196,6 +209,7 @@ export default {
     name:"addpokemon",
     data(){ 
         return{
+            genderless:false,
             regular:"",
             regularF:"",
             shiny:"",
