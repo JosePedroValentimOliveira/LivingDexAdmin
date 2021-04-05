@@ -1,14 +1,20 @@
 <template>
   <div name="attack" class="flex flex-row w-full justify-around items-center bg-red-200 p-2 gap-4">
                     <div>
-                        <select >
+                        <p>Type of move</p>
+                        <select name="moveCategory" v-model="moveCategorySelected">
                             <option v-for="cat in moveCategory" :key="cat">{{cat}}</option>
                         </select>
                     </div>
-                    <div>
+                    <div v-if="moveCategorySelected  === 'Level'">
                         <p>Level</p>
                         <input class="border border-black w-16" v-model="level" :name="`${game}level`">
                     </div>
+                    <div v-if="moveCategorySelected  === 'TM/HM'">
+                        <p>TM/HM</p>
+                        <input class="border border-black w-16" v-model="level" :name="`${game}TM/HM`" placeholder="TM01/HM01">
+                    </div>
+                    
                     <div>
                         <p>Name</p>
                         <input class="border border-black w-32 " :name="`${game}name`">
@@ -65,7 +71,8 @@ export default {
       return{
           level:"",
           test:false,
-          moveCategory : ["Level","TM/HM","Egg","Tutor"]
+          moveCategory : ["Level","TM/HM","Egg","Tutor"],
+          moveCategorySelected:"Level"
 
       }
   },

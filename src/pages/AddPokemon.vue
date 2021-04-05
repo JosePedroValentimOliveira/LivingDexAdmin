@@ -14,7 +14,7 @@
                             </div>
                             
                         </div>
-                        <div class=" w-5/12 flex flex-row justify-center items-center gap-4 ">
+                        <div class=" w-5/12 flex flex-row justify-center items-center space-y-4 ">
                             <div class="w-full ">
                                 <p class="float-left">Species: </p>
                                 <input v-model="species" placeholder="Fill in species" class="w-full text-black p-1 text-center border-gray-500 rounded border h-8" type="text" id="species" name="species"><br>
