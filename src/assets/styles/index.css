@@ -6,11 +6,11 @@
 
 @layer components {
     .router-link {
-        @apply flex flex-row items-center justify-start px-6 py-4 w-full text-xs font-semibold transform border-l-4 border-blue-200 transition duration-150;
+        @apply flex flex-row items-center justify-start px-6 py-4 w-full text-xs font-semibold transform border-l-8 border-red-900 transition duration-150;
     }
 
     .router-link:hover {
-        @apply border-red-500
+        @apply border-gray-900
     }
     .router-link:hover .wrapper {
         @apply translate-x-2
@@ -18,7 +18,7 @@
 
 
     .router-link-exact-active {
-        @apply text-red-500 border-l-4 border-red-500
+        @apply text-red-500 border-l-8 border-gray-900
     }
     .router-link-exact-active .wrapper {
         @apply translate-x-2

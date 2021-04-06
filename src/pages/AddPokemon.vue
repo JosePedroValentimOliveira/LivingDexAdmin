@@ -3,9 +3,14 @@
         <h1 class="text-3xl">Add Pokemon</h1>
         
         <form class=" w-full p-10 flex flex-col items-center justify-center gap-3" method="POST" action="http://localhost:3000/test">
-            <button type="submit" class="border border-black absolute top-20 right-20 rounded p-2 bg-blue-300 text-black font-bold">Save Pokemon</button>
-            <div class="flex flex-row  items-start w-10/12 justify-between ">
+            <button type="submit" class="border border-white absolute top-20 right-36 mr-2 rounded border border-white p-2 hover:bg-red-800 bg-red-900 text-white font-bold">Save Pokemon</button>
+            <div @click="general = !general" class=" bg-red-900 rounded p-2 w-11/12 flex flex-row items-center gap-2 ">
+                <h1  class="text-2xl ">General Information:</h1>
+            </div>
+            <div v-if='general' class="flex flex-row  items-start w-11/12 justify-between ">
+            
                 <div class="flex flex-row w-6/12  border  p-2">
+                
                     <div class="flex flex-col w-full gap-4">
                         <div class=" w-3/12 flex flex-row justify-center items-center gap-4 ">
                             <div class="w-full ">
@@ -121,12 +126,12 @@
                 </div>
             </div>
     </div>
-            <div class=" bg-red-900 rounded p-2 w-10/12 flex flex-row items-center ">
+            <div @click="sprites = !sprites" class=" bg-red-900 rounded p-2 w-11/12 flex flex-row items-center gap-2 ">
                 <h1 class="text-2xl ">Sprites:</h1>
                 <label class="ml-20" for="gender">Gender Difference: </label>
-                <input @change="onChangeGender()" v-model="gender" type="checkbox" name="gender" id="gender">
+                <input @click.stop @change="onChangeGender()" v-model="gender" type="checkbox" name="gender" id="gender">
             </div>
-            <div class="flex flex-row justify-center items-center w-10/12 ">
+            <div v-if="sprites" class="flex flex-row justify-center items-center w-11/12 ">
                 <div class=" w-9/12 flex flex-col justify-center items-center  ">
                     <div class="w-11/12 ">
                         <p class="float-left">Regular: </p>
@@ -166,13 +171,15 @@
                 
                 
             </div>
-            <div class="w-10/12 ">
-                <div class="bg-red-900 rounded p-2 w-full flex flex-row items-center justify-between mb-4">
+            <div class="w-11/12 ">
+                <div @click="moves = !moves" class="bg-red-900 rounded p-2 w-full flex flex-row items-center justify-between mb-4">
                     <h1 class="text-2xl ">Moves:</h1>
-                    <button  @click="addGame()" type="button" class="border border-black  rounded p-2 bg-blue-300 text-black font-bold">Add game</button>        
+                    <div @click.stop  @click="addGame()" class="text-white">
+                        <svg class="w-8" version="1.1" id="Icons" stroke="none" fill="currentcolor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve"><path d="M25,2H7C5.3,2,4,3.3,4,5v22c0,1.7,1.3,3,3,3h14c3.9,0,7-3.1,7-7V5C28,3.3,26.7,2,25,2z M13,24h-1v1c0,0.6-0.4,1-1,1s-1-0.4-1-1v-1H9c-0.6,0-1-0.4-1-1s0.4-1,1-1h1v-1c0-0.6,0.4-1,1-1s1,0.4,1,1v1h1c0.6,0,1,0.4,1,1S13.6,24,13,24z M19.5,26c-0.8,0-1.5-0.7-1.5-1.5s0.7-1.5,1.5-1.5s1.5,0.7,1.5,1.5S20.3,26,19.5,26z M22.5,23c-0.8,0-1.5-0.7-1.5-1.5s0.7-1.5,1.5-1.5s1.5,0.7,1.5,1.5S23.3,23,22.5,23z M24,17c0,0.6-0.4,1-1,1H9c-0.6,0-1-0.4-1-1V7c0-0.6,0.4-1,1-1h14c0.6,0,1,0.4,1,1V17z"/></svg>
+                    </div> 
                 </div>
-                <div>
-                    <component v-for="component in gamemoves" :is="component.component" :key="component.id" @removeGame="removeGame(component.id)"></component>
+                <div v-if="moves">
+                    <component  v-for="component in gamemoves" :is="component.component" :key="component.id" @removeGame="removeGame(component.id)"></component>
                 </div>
                 
             </div>
@@ -208,7 +215,10 @@ export default {
             types:["Normal","Fire","Water","Grass","Electric","Rock","Ground","Psychic","Bug","Flying","Dragon","Fairy","Ice","Steel","Dark","Poison","Ghost","Fighting"],
             eggGroups:["Amorphous","Bug","Dragon","Fairy","Field","Flying","Grass","Human-Like","Mineral","Monster","Water 1","Water 2","Water 3"],
             gamemoves:[],
-            componentId:0
+            componentId:0,
+            general:true,
+            sprites:true,
+            moves:true
         }
     },
     children:[GameMoveField],
