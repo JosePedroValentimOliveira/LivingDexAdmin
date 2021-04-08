@@ -7,7 +7,7 @@
             <div @click="general = !general" class=" bg-red-900 rounded p-2 w-11/12 flex flex-row items-center gap-2 ">
                 <h1  class="text-2xl ">General Information:</h1>
             </div>
-            <div v-if='general' class="flex flex-row  items-start w-11/12 justify-between ">
+            <div v-show='general' class="flex flex-row  items-start w-11/12 justify-between ">
             
                 <div class="flex flex-row w-6/12  border  p-2">
                 
@@ -131,7 +131,7 @@
                 <label class="ml-20" for="gender">Gender Difference: </label>
                 <input @click.stop @change="onChangeGender()" v-model="gender" type="checkbox" name="gender" id="gender">
             </div>
-            <div v-if="sprites" class="flex flex-row justify-center items-center w-11/12 ">
+            <div v-show="sprites" class="flex flex-row justify-center items-center w-11/12 ">
                 <div class=" w-9/12 flex flex-col justify-center items-center  ">
                     <div class="w-11/12 ">
                         <p class="float-left">Regular: </p>
@@ -178,13 +178,24 @@
                         <svg class="w-8" version="1.1" id="Icons" stroke="none" fill="currentcolor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve"><path d="M25,2H7C5.3,2,4,3.3,4,5v22c0,1.7,1.3,3,3,3h14c3.9,0,7-3.1,7-7V5C28,3.3,26.7,2,25,2z M13,24h-1v1c0,0.6-0.4,1-1,1s-1-0.4-1-1v-1H9c-0.6,0-1-0.4-1-1s0.4-1,1-1h1v-1c0-0.6,0.4-1,1-1s1,0.4,1,1v1h1c0.6,0,1,0.4,1,1S13.6,24,13,24z M19.5,26c-0.8,0-1.5-0.7-1.5-1.5s0.7-1.5,1.5-1.5s1.5,0.7,1.5,1.5S20.3,26,19.5,26z M22.5,23c-0.8,0-1.5-0.7-1.5-1.5s0.7-1.5,1.5-1.5s1.5,0.7,1.5,1.5S23.3,23,22.5,23z M24,17c0,0.6-0.4,1-1,1H9c-0.6,0-1-0.4-1-1V7c0-0.6,0.4-1,1-1h14c0.6,0,1,0.4,1,1V17z"/></svg>
                     </div> 
                 </div>
-                <div v-if="moves">
+                <div v-show="moves">
                     <component  v-for="component in gamemoves" :is="component.component" :key="component.id" @removeGame="removeGame(component.id)"></component>
                 </div>
                 
             </div>
             
-            
+            <div class="w-11/12 ">
+                <div @click="locations = !locations" class="bg-red-900 rounded p-2 w-full flex flex-row items-center justify-between mb-4">
+                    <h1 class="text-2xl ">Locations:</h1>
+                    <div @click.stop  @click="addLocation()" class="text-white">
+                        <svg class="w-8" version="1.1" id="Icons" stroke="none" fill="currentcolor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve"><path d="M25,2H7C5.3,2,4,3.3,4,5v22c0,1.7,1.3,3,3,3h14c3.9,0,7-3.1,7-7V5C28,3.3,26.7,2,25,2z M13,24h-1v1c0,0.6-0.4,1-1,1s-1-0.4-1-1v-1H9c-0.6,0-1-0.4-1-1s0.4-1,1-1h1v-1c0-0.6,0.4-1,1-1s1,0.4,1,1v1h1c0.6,0,1,0.4,1,1S13.6,24,13,24z M19.5,26c-0.8,0-1.5-0.7-1.5-1.5s0.7-1.5,1.5-1.5s1.5,0.7,1.5,1.5S20.3,26,19.5,26z M22.5,23c-0.8,0-1.5-0.7-1.5-1.5s0.7-1.5,1.5-1.5s1.5,0.7,1.5,1.5S23.3,23,22.5,23z M24,17c0,0.6-0.4,1-1,1H9c-0.6,0-1-0.4-1-1V7c0-0.6,0.4-1,1-1h14c0.6,0,1,0.4,1,1V17z"/></svg>
+                    </div> 
+                </div>
+                <div v-show="locations">
+                    <component  v-for="component in gamelocations" :is="component.component" :key="component.id" @removeGame="removeLocation(component.id)"></component>
+                </div>
+                
+            </div>
             
 
 
@@ -194,6 +205,7 @@
 
 <script>
 import GameMoveField from '../components/GameMoveField'
+import LocationField from '../components/LocationField'
 
 export default {
     name:"addpokemon",
@@ -213,15 +225,17 @@ export default {
             maleRatio:0,
             femaleRatio:0,
             types:["Normal","Fire","Water","Grass","Electric","Rock","Ground","Psychic","Bug","Flying","Dragon","Fairy","Ice","Steel","Dark","Poison","Ghost","Fighting"],
-            eggGroups:["Amorphous","Bug","Dragon","Fairy","Field","Flying","Grass","Human-Like","Mineral","Monster","Water 1","Water 2","Water 3"],
+            eggGroups:["Amorphous","Bug","Dragon","Fairy","Field","Flying","Grass","Human-Like","Mineral","Monster","Water 1","Water 2","Water 3","Ditto","Undiscovered"],
             gamemoves:[],
+            gamelocations:[],
             componentId:0,
             general:true,
             sprites:true,
-            moves:true
+            moves:true,
+            locations:true
         }
     },
-    children:[GameMoveField],
+    children:[GameMoveField,LocationField],
     methods:{
         changeFemale(maleRatio){
             this.femaleRatio = 100 - maleRatio;
@@ -246,6 +260,14 @@ export default {
         removeGame(id){
             const pos = this.gamemoves.map((e)=>{return e.id}).indexOf(id);
             this.gamemoves.splice(pos,1);             
+        },
+         addLocation(){
+            this.gamelocations.push({id:this.componentId,component:LocationField});
+            this.componentId +=1;
+        },
+        removeLocation(id){
+            const pos = this.gamelocations.map((e)=>{return e.id}).indexOf(id);
+            this.gamelocations.splice(pos,1);             
         },
         populate(){
             this.regular = `https://livingdexapi.herokuapp.com/sprites/regular/${this.id}.png`

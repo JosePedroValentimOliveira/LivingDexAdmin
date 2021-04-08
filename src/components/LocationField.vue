@@ -14,7 +14,7 @@
         </div>
         
      </div>
-     <div @click="dropdown()"  class="text-4xl mr-2 text-white">
+     <div @click="open = !open"  class="text-4xl mr-2 text-white">
         <div v-if="!open" class="w-10 ">
           
           <svg xmlns="http://www.w3.org/2000/svg" fill="none"  viewBox="0 0 24 24"  stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
@@ -35,25 +35,25 @@
 </template>
 
 <script>
-import MoveLine from './MoveLine';
+import LocationLine from './LocationLine';
 
 
 export default {
-  name: 'GameMoveField',
+  name: 'LocationField',
   data(){
     return{
-      games:['Red/Blue','Yellow','Gold/Silver/Crystal','Fire Red/Leaf Green','Ruby/Sapphire/Emerald','DP/Platinum/HGSS','BW/BW2','XY','ORAS','SUMO/USUM/Lets Go','SWSH'],
+      games:['Red','Blue','Yellow','Gold','Silver','Crystal','Fire Red','Leaf Green','Ruby','Sapphire','Emerald','Diamond','Pearl','Platinum','HeartGold','SoulSilver','Black','White','Black 2','White 2','X','Y','Omege Ruby','Alpha Sapphire','Sun','Moon','Ultra Sun','Ultra Moon',"Let's Go, Pikachu!","Let's Go, Eevee!",'Sword','Shield','Brilliant Diamond','Shining Pearl','Legends: Arceus'],
       lines:[],
-      game:"Red/Blue",
+      game:"Red",
       id:0,
       open:true
     
     }
   },
-  components:{MoveLine},
+  components:{LocationLine},
   methods:{
     addLine(){
-      this.lines.push({id:this.id,component:MoveLine});
+      this.lines.push({id:this.id,component:LocationLine});
       this.id +=1;
     },
     removeLine(id){
@@ -63,9 +63,6 @@ export default {
     removeGame(){
       this.$emit('removeGame')
     },
-    dropdown(){
-      this.open = !this.open;
-    }
     
   }
 }
