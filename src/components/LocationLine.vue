@@ -36,7 +36,8 @@ export default {
         moveCategory : ["Level","TM/HM","Egg","Tutor"],
         moveCategorySelected:"Level",
         types:["Normal","Fire","Water","Grass","Electric","Rock","Ground","Psychic","Bug","Flying","Dragon","Fairy","Ice","Steel","Dark","Poison","Ghost","Fighting"],
-        categories:['Physical','Special','Other']
+        categories:['Physical','Special','Other'],
+        method:["Walking","Old Rod","Good Rod","Super Rod","Surfing","Overworld","Sweet scent","Headbutt","Double Grass","Interact","Hidden Hollow","Starter"]
       }
   },
   props:['index','game'],
