@@ -1,7 +1,7 @@
 <template>
   <div class="text-black mb-4 " >
     <div class="w-full bg-gray-600 flex items-center justify-between p-2 rounded-t ">
-      <select class="border text-black border-gray-500 rounded h-8  bg-gray-100   w-2/12 " v-model="game" name="game" >
+      <select class="border text-black border-gray-500 rounded h-8  bg-gray-100   w-2/12 " v-model="game" name="locationGame" >
         <option v-for="game in games" :value="game" :key="game">{{game}}</option>
       </select>
       <div class="flex flex-row gap-4">

@@ -17,7 +17,29 @@
                     </div>
                     <div class="text-center">
                         <p>Method</p>
-                        <input class="border border-gray-500 rounded h-8  bg-gray-100 text-center w-50" :name="`${game}-location`">
+                        <select class="border border-gray-500 rounded h-8  bg-gray-100 text-center w-50" :name="`${game}-method`" >
+                          <option v-for="method in methods" :value="method" :key="method">{{method}}</option>
+                        </select>
+                    </div>
+                    <div class="text-center">
+                        <p>Time</p>
+                        <select class="border border-gray-500 rounded h-8  bg-gray-100 text-center w-50" :name="`${game}-time`" >
+                          <option v-for="time in times" :value="time" :key="time">{{time}}</option>
+                        </select>
+                    </div>
+                    <div class="text-center">
+                      <p>Min Level</p>
+                      <div class="border border-gray-500 rounded h-8  bg-gray-100 flex flex-row items-center p-2 w-24 mr-6">
+                          <input type="number" max="100" min="1" step="1" :name="`${game}-minLevel`" class="overflow-hidden text-black text-center border-0 outline-none bg-transparent w-1/2" >
+                          
+                      </div>
+                    </div>
+                    <div class="flex flex-col">
+                      <p class="ml-4">Max Level</p>
+                      <div class="border border-gray-500 rounded h-8  bg-gray-100 flex flex-row items-center p-2 w-24 mr-6">
+                          <input type="number" max="100" min="1" step="1" :name="`${game}-maxLevel`" class="overflow-hidden text-black text-center border-0 outline-none bg-transparent w-1/2" >
+                          
+                      </div>
                     </div>
                     <div  @click="removeLine()" class="absolute bottom-1/4 right-2 text-gray-900">
                         
@@ -31,13 +53,9 @@ export default {
   name: 'MoveLine',
   data(){
       return{
-        level:"",
-        test:false,
-        moveCategory : ["Level","TM/HM","Egg","Tutor"],
-        moveCategorySelected:"Level",
-        types:["Normal","Fire","Water","Grass","Electric","Rock","Ground","Psychic","Bug","Flying","Dragon","Fairy","Ice","Steel","Dark","Poison","Ghost","Fighting"],
-        categories:['Physical','Special','Other'],
-        method:["Walking","Old Rod","Good Rod","Super Rod","Surfing","Overworld","Sweet scent","Headbutt","Double Grass","Interact","Hidden Hollow","Starter"]
+        methods:["Walking","Old Rod","Good Rod","Super Rod","Surfing","Overworld","Sweet scent","Headbutt","Double Grass","Interact","Hidden Hollow","Starter"],
+        times:["None","Morning","Day","Night","Spring","Summer","Autumn","Winter","Sunny","Overcast","Raining","Thunderstorm","Snowing","Snowstorm","Harsh Sunlight","Sandstorm","Fog"]
+      
       }
   },
   props:['index','game'],
